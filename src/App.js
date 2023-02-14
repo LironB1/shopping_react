@@ -61,19 +61,6 @@ function App() {
         
     }
     
-    // async function deleteProduct(id) {
-    //     const response = await fetch(`# /localhost:8000/products
-    //     /${id}/`, {
-    //       method: 'DELETE'
-    //     });
-    //     if (response.ok) {
-    //       console.log('Product deleted successfully');
-    //     } else {
-    //       console.error('Failed to delete product');
-    //     }
-    //   }
-      
-
     return (
         <div className="container">
             <BrowserRouter>
@@ -82,7 +69,7 @@ function App() {
                     <Header logout={logout} />
                     {/* <Products products={products} /> */}
                     <Routes>
-                    <Route path="/" element={<Products products={products}/>} exact />
+                    <Route path="/" element={<Products products={products} cart_items={cart_items}/>} exact />
                     <Route path="/cart" element={<CartItem cart_items={cart_items} />} />
                     <Route path="/logout" element={<Cart />} />
                     </Routes>

@@ -10,7 +10,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 function Header({logout}) {
   return (
     
-    <div>
+    <div className="Container">
     
 
     <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -68,4 +68,3 @@ function Header({logout}) {
 }
 
 export default Header
-
