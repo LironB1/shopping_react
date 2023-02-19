@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { ListGroupItem, Row,Form,Col } from 'react-bootstrap';
 import { Container, Button, Item } from 'semantic-ui-react'
+import AddToCartButton from './AddToCartButton';
 
 
-function Product({product, history}) {
-  const [qty, setQty] = useState(1)
+function Product({product,cart, addToCart}) {
+  const [showAddItem, setShowAddItem] = useState(false);
 
-  const addToCartHandler =()=>{
-    history.push(`/cart/${product.params.id}?qty=${qty}`)
-  }
+
+  // const addToCartHandler =()=>{
+  //   history.push(`/cart/${product.params.id}?qty=${qty}`)
+  
   return (
     <Container>
         <Item.Group relaxed>
@@ -20,28 +21,10 @@ function Product({product, history}) {
         <Item.Description>{product.description}</Item.Description>
         <Item.Extra>
           <h4>{product.price}</h4>
-          <Button onClick={addToCartHandler} disabled={product.countInStock === 0} floated='lefr' href="/cart">Add To Cart</Button>
-          {product.countInStock > 0 &&(
-          <ListGroupItem>
-            <Row>
-              <Col xs='auto' className='my-1'>
-              <Form.Control
-               as="select" value={qty}
-               onChange={(e) => setQty(e.target.value)}
-               >{
-                [...Array(product.countInStock).keys()].map((x)=>(
-                  <option key={x+1} value={x+1}>
-                    {x+1}
-                  </option>
-                ))
-               }
-               </Form.Control>
-              </Col>
-            </Row>
-          </ListGroupItem>
-          )}
-          <Button floated='left'>DELETE</Button>  
-        </Item.Extra>
+        
+          
+          <Button variant="primary" onClick={() => {setShowAddItem(!showAddItem)}}>{showAddItem ? "Close" : "Add To Cart"}</Button>
+      {showAddItem && <AddToCartButton productId={product.id} addToCart={addToCart} />}        </Item.Extra>
       </Item.Content>
 
     </Item>
@@ -49,7 +32,7 @@ function Product({product, history}) {
     
     </Container>
   );
-}
+  }
 
   
 export default Product
